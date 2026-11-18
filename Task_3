@@ -1,0 +1,77 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+        Console.InputEncoding = System.Text.Encoding.UTF8;
+
+        
+        string[] questions =
+        {
+            "Якого кольору прапор України?",
+            "В якому місті знаходиться ДТЕУ?",
+            "Яка столиця Франції?",
+            "Скільки днів у високосному році?",
+            "Яка найбільша планета Сонячної системи?"
+        };
+
+        
+        string[,] answers =
+        {
+            { "жовтий і блакитний", "червоний і зелений", "чорний і жовтий", "зелений і фіолетовий" },
+            { "Вінниця", "Київ", "Львів", "Одеса" },
+            { "Берлін", "Мадрид", "Париж", "Рим" },
+            { "364", "365", "367", "366" },
+            { "Юпітер", "Сатурн", "Земля", "Марс" }
+        };
+
+        
+        int[] correctAnswers = { 1, 2, 3, 4, 1 };
+
+        int score = 0;
+
+        for (int i = 0; i < questions.Length; i++)
+        {
+            Console.WriteLine($"Current User Score: {score}");
+            Console.WriteLine($"Питання {i + 1}, {questions[i]}");
+            Console.WriteLine();
+
+            for (int j = 0; j < 4; j++)
+            {
+                Console.WriteLine($"{j + 1}. {answers[i, j]}");
+            }
+            Console.WriteLine();
+
+            
+            int userAnswer;
+            while (true)
+            {
+                Console.Write("Ваша відповідь: ");
+                if (int.TryParse(Console.ReadLine(), out userAnswer) && userAnswer >= 1 && userAnswer <= 4)
+                    break;
+                Console.WriteLine("Введіть число від 1 до 4.");
+            }
+
+            if (userAnswer == correctAnswers[i])
+            {
+                Console.WriteLine("Correct answer");
+                score += 100;
+            }
+            else
+            {
+                Console.WriteLine("Wrong Answer");
+                Console.WriteLine($"Ваш результат: {score}");
+                Console.WriteLine("Кінець програми.");
+                return; 
+            }
+
+            Console.WriteLine();
+        }
+
+        
+        Console.WriteLine($"Current User Score: {score}");
+        Console.WriteLine("Вітаємо! Ви відповіли правильно на всі питання!");
+    }
+}
