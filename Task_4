@@ -1,0 +1,50 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введіть вираз: ");
+        string input = Console.ReadLine();
+
+        
+        string[] parts = input.Split(' ');
+
+        double result = 0;                     
+        double term = double.Parse(parts[0]);  
+        string sign = "+";                     
+
+        for (int i = 1; i < parts.Length; i += 2)
+        {
+            string op = parts[i];
+            double number = double.Parse(parts[i + 1]);
+
+            if (op == "*")
+            {
+                term = term * number;
+            }
+            else if (op == "/")
+            {
+                term = term / number;
+            }
+            else // + або -
+            {
+                if (sign == "+")
+                    result = result + term;
+                else
+                    result = result - term;
+
+                term = number;
+                sign = op;
+            }
+        }
+
+        
+        if (sign == "+")
+            result = result + term;
+        else
+            result = result - term;
+
+        Console.WriteLine("Відповідь: " + result);
+    }
+}
